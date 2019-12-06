@@ -74,7 +74,8 @@ The prototype for this function is:
 	
 A simple example is:
 
-	struct http_response *hresp = http_get("http://www.google.com", "User-agent:MyUserAgent\r\n");
+	custom_headers 需要自己注意控制 /r/n, 因为代码里面有在末尾加上/r/n的处理，如果没有处理好会导致服务端解析数据的长度不正确
+	struct http_response *hresp = http_get("http://www.google.com", "User-agent:MyUserAgent");
 	
 http_get does handle redirects automaticly. The basic headers used in this method:
 
@@ -89,12 +90,13 @@ the minimal headers required, in the second parameter you can specify extra head
 the post data can be specified.
 
 The prototype for this function is:
-
+	
+	custom_headers 需要自己注意控制 /r/n, 因为代码里面有在末尾加上/r/n的处理，如果没有处理好会导致服务端解析数据的长度不正确
 	struct http_response* http_post(char *url, char *custom_headers, char *post_data)
 	
 A simple example is:
 
-	struct http_response *hresp = http_post("http://mywebsite.com/login.php", "User-agent:MyuserAgent\r\n", "username=Kirk&password=lol123");
+	struct http_response *hresp = http_post("http://mywebsite.com/login.php", "User-agent:MyuserAgent", "username=Kirk&password=lol123");
 	
 http_post does handle redirects automaticly. The basic headers used in this method:
 
